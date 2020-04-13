@@ -3,9 +3,9 @@ import { useActions, useValues } from 'kea'
 import { entityFilterLogic } from './actionFilterLogic'
 import { ActionFilterRow } from './ActionFilterRow'
 
-export function ActionFilter(props) {
-    const { allFilters, filters } = useValues(entityFilterLogic)
-    const { createNewFilter, initializeLocalFilters } = useActions(entityFilterLogic)
+export function ActionFilter({ setFilters, defaultFilters, showMaths }) {
+    const { allFilters, filters } = useValues(entityFilterLogic({ setFilters, defaultFilters }))
+    const { createNewFilter, initializeLocalFilters } = useActions(entityFilterLogic({ setFilters, defaultFilters }))
 
     useEffect(() => {
         if (allFilters.length == 0) {
@@ -22,12 +22,13 @@ export function ActionFilter(props) {
         <div>
             {allFilters &&
                 allFilters.map((filter, index) => {
-                    return <ActionFilterRow filter={filter} index={index} key={index}></ActionFilterRow>
+                    return <ActionFilterRow filter={filter} index={index} key={index} showMaths={showMaths} />
                 })}
             <button
                 className="btn btn-sm btn-outline-success"
                 onClick={() => createNewFilter()}
                 style={{ marginTop: '0.5rem' }}
+                type="button"
             >
                 Add Element
             </button>
