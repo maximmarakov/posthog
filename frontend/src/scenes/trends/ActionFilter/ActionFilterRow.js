@@ -42,6 +42,7 @@ export function ActionFilterRow({ filter, index, showMaths }) {
                 ref={node}
                 className="filter-action"
                 onClick={onClick}
+                type="button"
                 style={{
                     border: 0,
                     padding: 0,
